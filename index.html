@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="naver-site-verification" content="44602a4ce8faff32ab0869c449f8dada6adb304f" />
+    <meta name="google-site-verification" content="GhGj63W7kkc-78a0BTXjR-_TRE8ml771kQOtegBKhHs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="description" content="RacingClub is a thrilling betting simulation game. Collect virtual assets, race to the top of the leaderboard, and experience the ultimate adrenaline rush!" />
+    <meta name="keywords" content="racing club, betting simulation, virtual assets, online racing, adrenaline, racing game, bet game" />
+    <meta property="og:title" content="RacingClub - The Ultimate Virtual Betting Adventure" />
+    <meta property="og:description" content="Join RacingClub to place bets, gather virtual assets, and dominate the track! Experience fast-paced thrills and claim your victory today." />
+    <meta property="og:url" content="https://raicngclub365.netlify.app/" />
+    <meta property="og:image" content="https://raicngclub365.netlify.app/logo.png" />
+
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Racing Club</title>
     <style>
         /* 간단한 스타일 예시 - 필요한 부분만 작성 */
@@ -241,7 +250,7 @@ h2{
     <img src="logo.png" class="logo">
     <!-- 로그인 섹션 -->
     <div class="login-container">
-        <div class="text">로그인 / 회원가입</div>
+        <div class="text">Login / Sign Up</div>
         <form>
             <div class="googleLogin">
                 <img 
@@ -428,12 +437,12 @@ h2{
 
                 await loadBananaCount(userId);
 
-                alert(`환영합니다, ${user.displayName}!`);
+                alert(`Welcom!, ${user.displayName}!`);
 
                 const userInfoDiv = document.getElementById('user-info');
                 userInfoDiv.innerHTML = `
-                    <p>닉네임: ${user.displayName}</p>
-                    <p>이메일: ${user.email}</p>
+                    <p>NickName: ${user.displayName}</p>
+                    <p>Email: ${user.email}</p>
                 `;
 
                 loadRanking();
@@ -559,19 +568,19 @@ h2{
             const betAmount = parseInt(bananaBetInput.value, 10);
 
             if (!userId) {
-                alert("먼저 구글 로그인을 해주세요!");
+                alert("Please log in with Google first!");
                 return;
             }
             if (isNaN(betAmount) || betAmount <= 0) {
-                alert("올바른 배팅 금액을 입력하세요!");
+                alert("Please enter a valid betting amount!");
                 return;
             }
             if (betAmount > bananaCount) {
-                alert("바나나가 부족합니다!");
+                alert("You don't have enough bananas!");
                 return;
             }
             if (selectedCars.length === 0) {
-                alert("자동차를 선택해주세요!");
+                alert("Please select a car!");
                 return;
             }
 
@@ -735,10 +744,10 @@ h2{
                     const winnings = betAmount * payoutMultiplier; 
                     setBananaCount(bananaCount + winnings);
                     resultMessage.textContent =
-                        `축하합니다! 1등: ${finishOrder[0]} 예측 성공! 
-                         ${winnings} 바나나를 획득했습니다!`;
+                        `Congratulations! 1st place: ${finishOrder[0]} - Prediction Success! 
+                         ${winnings} You have earned bananas!`;
                 } else {
-                    resultMessage.textContent = `아쉽습니다! 1등: ${finishOrder[0]}`;
+                    resultMessage.textContent = `Too bad! 1st place: ${finishOrder[0]}`;
                 }
             } else if (topNFinish === 2) {
                 const [predictedFirst, predictedSecond] = selectedCars;
@@ -749,11 +758,11 @@ h2{
                     const winnings = betAmount * payoutMultiplier;
                     setBananaCount(bananaCount + winnings);
                     resultMessage.textContent = 
-                        `축하합니다! 1등: ${finishOrder[0]}, 2등: ${finishOrder[1]} 예측 성공!
-                         ${winnings} 바나나를 획득했습니다!`;
+                        `Congratulations! 1st place: ${finishOrder[0]}, 2nd: ${finishOrder[1]} - Prediction Success!
+                         ${winnings} You have earned bananas!`;
                 } else {
                     resultMessage.textContent = 
-                        `아쉽습니다! 1등: ${finishOrder[0]}, 2등: ${finishOrder[1]}`;
+                        `Too bad! 1st place: ${finishOrder[0]}, 2nd: ${finishOrder[1]}`;
                 }
             }
 
