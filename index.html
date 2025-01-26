@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Racing Club</title>
+    <style>
+        /* 간단한 스타일 예시 - 필요한 부분만 작성 */
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color:black; 
+}
+
+h1 {
+    margin-top: 0;  
+    color: #fff; /* 제목 텍스트 색상을 흰색으로 설정 */
+}
+
+.car-selection {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.car-selection img {
+    width: 45px; /* 차량 선택 이미지 크기 */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.car-selection img.selected {
+    transform: scale(1.2); /* 선택된 차량 강조 */
+    box-shadow: 0 0 10px 5px #ffb703; /* 강조 효과 추가 */
+}
+
+/* 아래는 삭제해야 할 듯. */
+.car-selection img:hover {
+    transform: scale(1.1);
+}
+
+.car-selection img.selected {
+    border: 3px solid #ffb703; /* 선택된 차량 강조 */
+    border-radius: 10px;
+}
+
+.race-track {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    margin: 20px auto;
+    background: url('track2.jpg') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+    border: 2px solid #333;
+    border-radius: 15px;
+}
+
+.car {
+    position: absolute;
+    width: 25px; /* 트랙 위 차량 크기 */
+    height: auto;
+    transition: transform 0.1s;
+}
+
+.result-message {
+    margin-top: 20px;
+    font-size: 32.4px; /* 폰트 크기 1.8배로 증가 */
+    color: #ffb703;
+    color: #ffb703;
+}
+    .ranking-container {
+    position: absolute;
+    top: 240px;
+    right: 20px;
+    color: #fff;
+    font-size: 20.8px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    border: 2px solid #ffb703;
+    width: 250px; /* 가로 크기 줄임 */
+    height: 410px; /* 세로 크기 늘림 */
+}
+
+
+.ranking-container h2 {
+    font-size: 26px; /* 폰트 크기 증가 */
+    color: #ffb703;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif; /* 폰트 변경 */
+}
+
+
+.ranking-container ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ranking-container li {
+    margin: 8px 0;
+    font-size: 20.8px; /* 폰트 크기 증가 */
+    color: #ccc;
+    font-family: 'Poppins', sans-serif; /* 폰트 변경 */
+}
+
+.login-container {
+    position: absolute;
+    top: 350px;
+    left: 20px;
+    color: #fff;
+    font-size: 18px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    border: 2px solid #ffb703;
+    width: 250px;
+}
+
+.login-container h2 {
+    font-size: 22px;
+    color: #ffb703;
+    margin-bottom: 10px;
+}
+
+.login-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #ccc;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #219ebc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-container button:hover {
+    background-color: #023047;
+}
+.signin, .signup{
+    font-size: 2em;
+}
+.googleLogin {
+    text-align: center; /* 버튼을 가운데 정렬 */
+    margin-top: 10px; /* 위쪽 간격 줄이기 */
+}
+  
+.login-button {
+    cursor: pointer;
+    transition: transform 0.2s ease; /* 이미지 변경 시 약간의 효과 */
+}
+  
+.login-button:hover {
+    content: url(hoverlogin.png); /* 마우스 오버 시 hoverlogin.png로 변경 */
+}
+.googleLogin img {
+    cursor: pointer;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 문구와 버튼 사이의 간격 */
+}
+.text{
+    text-align: center;
+}
+ 
+/* bet-button 추가 */
+.bet-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #219ebc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.bet-button:hover {
+    background-color: #023047;
+}
+
+.logo{
+    position: absolute;
+    left: 20px;
+    width: 300px;
+}
+
+h2{
+    color: white;
+}
+
+.rank-indicator {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #ffb703;
+    color: black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+    </style>
+</head>
+<body>
+    <img src="logo.png" class="logo">
+    <!-- 로그인 섹션 -->
+    <div class="login-container">
+        <div class="text">로그인 / 회원가입</div>
+        <form>
+            <div class="googleLogin">
+                <img 
+                  id="googleLogin" 
+                  src="googlelogin.png" 
+                  alt="Sign in with Google"
+                  class="login-button"
+                  style="width: 200px; cursor: pointer;"
+                />
+            </div>
+        </form>
+
+        <!-- 추가: 로그인 성공 시 닉네임/이메일을 표시할 영역 -->
+        <div id="user-info" style="margin-top: 10px; color: white;"></div>
+        <!-- 여기까지 추가 -->
+    </div>
+
+    <!-- 랭킹 섹션 -->
+    <div class="ranking-container">
+        <h2>Ranking</h2>
+        <ol id="ranking-list">
+            <li>1. Player1 - 1500pts</li>
+            <li>2. Player2 - 1400pts</li>
+            <li>3. Player3 - 1300pts</li>
+            <li>4. Player4 - 1200pts</li>
+            <li>5. Player5 - 1100pts</li>
+            <li>6. Player6 - 1000pts</li>
+            <li>7. Player7 - 900pts</li>
+            <li>8. Player8 - 800pts</li>
+            <li>9. Player9 - 700pts</li>
+            <li>10. Player10 - 600pts</li>
+        </ol>
+    </div>
+
+    <!-- 상태 표시 섹션 -->
+    <div id="status-container" style="position: absolute; top: 20px; right: 20px; color: #fff; font-size: 28.8px; text-align: left; background-color: rgba(0, 0, 0, 0.85); padding: 20px; border-radius: 16px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); border: 2px solid #ffb703;">
+        <p style="font-size: 14px; margin: 10px 0 0 0; color: #ccc;">All cars have a winning probability of 25%.</p>
+        <h2 style="margin: 0; font-size: 32.4px; color: #ffb703;">My Wallet</h2>
+        <div id="banana-status" style="font-size: 28.8px;">🍌 x1000</div>
+    </div>
+
+    <!-- 배팅 컨테이너 -->
+    <div id="betting-container" class="betting-container">
+        <h2>Betting Winner!</h2>
+        <button id="bet-on-top2" class="bet-button">1, 2등 선택 (배당률 12배)</button>
+        <button id="bet-on-top1" class="bet-button">1등 선택 (배당률 4배)</button>
+    </div>
+
+    <div id="betting-details" class="betting-details" style="display: none;">
+        <div class="car-selection">
+            <div style="position: relative;">
+                <img src="greencar.png" alt="Green" id="greencar" />
+                <span class="rank-indicator" style="display: none;"></span>
+            </div>
+            <div style="position: relative;">
+                <img src="redcar.png" alt="Red" id="redcar" />
+                <span class="rank-indicator" style="display: none;"></span>
+            </div>
+            <div style="position: relative;">
+                <img src="yellowcar.png" alt="Yellow" id="yellowcar" />
+                <span class="rank-indicator" style="display: none;"></span>
+            </div>
+            <div style="position: relative;">
+                <img src="bluecar.png" alt="Blue" id="bluecar" />
+                <span class="rank-indicator" style="display: none;"></span>
+            </div>
+        </div>
+        <label for="banana-bet">Bet Amount</label>
+        <input type="number" id="banana-bet" min="1" placeholder="Enter Amount" />
+        <button id="confirm-bet" class="bet-button">Confirm Bet</button>
+    </div>
+
+    <!-- 레이스 트랙 및 결과 섹션 -->
+    <div class="race-track" id="race-track"></div>
+    <div class="result-message" id="result-message"></div>
+
+    <!-- Firebase 및 Main Script (하나의 스크립트로 통합) -->
+    <script type="module">
+        /************************************
+         *       Firebase 초기 설정
+         ************************************/
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, getDoc, setDoc, updateDoc,
+            collection, query, orderBy, limit, getDocs 
+        } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAQLkuMZ0w8byG2NbF96lW1n_zxUIS7z8",
+            authDomain: "easylogin-a24ec.firebaseapp.com",
+            projectId: "easylogin-a24ec",
+            storageBucket: "easylogin-a24ec.firebasestorage.app",
+            messagingSenderId: "267621975251",
+            appId: "1:267621975251:web:a01f3432c1adb016b54026",
+            measurementId: "G-S6D54RBB24"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore(app);
+
+        /************************************
+         *        전역 변수
+         ************************************/
+        let userId = null;           // Firebase Auth에 로그인한 사용자 UID
+        let bananaCount = 1000;      // 현재 바나나 수(게임 내에서 사용)
+        let selectedCars = [];       // 배팅 시 사용
+        let payoutMultiplier = 1;    // 배팅 배당률
+        let topNFinish = 1;          // 1등 맞추기 or 1등+2등 맞추기
+        let raceOver = false;
+
+        /************************************
+         *     DOM 요소 참조
+         ************************************/
+        const googleLoginBtn   = document.getElementById('googleLogin');
+        const bananaStatusElem = document.getElementById('banana-status');
+        const bettingContainer = document.getElementById('betting-container');
+        const bettingDetails   = document.getElementById('betting-details');
+        const cars             = document.querySelectorAll('.car-selection img');
+        const confirmBetButton = document.getElementById('confirm-bet');
+        const bananaBetInput   = document.getElementById('banana-bet');
+        const raceTrack        = document.getElementById('race-track');
+        const resultMessage    = document.getElementById('result-message');
+
+        const betOnTop2Button  = document.getElementById('bet-on-top2');
+        const betOnTop1Button  = document.getElementById('bet-on-top1');
+
+        /************************************
+         *       Firestore 관련 함수
+         ************************************/
+        async function loadBananaCount(userId) {
+            const userRef = doc(db, "users", userId);
+            const userDoc = await getDoc(userRef);
+
+            if (userDoc.exists()) {
+                const data = userDoc.data();
+                bananaCount = data.bananas; 
+                updateBananaStatus();       
+            } else {
+                await setDoc(userRef, { bananas: 1000 });
+                bananaCount = 1000;
+                updateBananaStatus();
+            }
+        }
+
+        async function setBananaCount(newValue) {
+            bananaCount = newValue;
+            if (userId) {
+                const userRef = doc(db, "users", userId);
+                await updateDoc(userRef, { bananas: bananaCount });
+            }
+            updateBananaStatus();
+        }
+
+        function updateBananaStatus() {
+            bananaStatusElem.textContent = `🍌 x${bananaCount}`;
+        }
+
+        /************************************
+         *          Google Login
+         ************************************/
+        googleLoginBtn.addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                userId = user.uid;
+
+                const userRef = doc(db, "users", userId);
+                const docSnap = await getDoc(userRef);
+
+                if (!docSnap.exists()) {
+                    await setDoc(userRef, {
+                        displayName: user.displayName || "NoName",
+                        bananas: 1000
+                    });
+                } else {
+                    await updateDoc(userRef, {
+                        displayName: user.displayName || "NoName"
+                    });
+                }
+
+                await loadBananaCount(userId);
+
+                alert(`환영합니다, ${user.displayName}!`);
+
+                const userInfoDiv = document.getElementById('user-info');
+                userInfoDiv.innerHTML = `
+                    <p>닉네임: ${user.displayName}</p>
+                    <p>이메일: ${user.email}</p>
+                `;
+
+                loadRanking();
+
+            } catch (error) {
+                console.error("Error during Google Login:", error);
+            }
+        });
+
+        /************************************
+         *   랭킹 불러오기 (Firestore)
+         ************************************/
+        async function loadRanking() {
+            try {
+                const rankingQuery = query(
+                    collection(db, "users"),
+                    orderBy("bananas", "desc"),
+                    limit(10)
+                );
+                const querySnapshot = await getDocs(rankingQuery);
+                const rankingList = document.getElementById('ranking-list');
+                rankingList.innerHTML = '';
+
+                let rank = 1;
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const displayName = data.displayName || "NoName";
+                    const bananas = data.bananas || 0;
+
+                    const li = document.createElement('li');
+                    li.textContent = `${rank}. ${displayName} - ${bananas}pts`;
+                    
+                    if (docSnap.id === userId) {
+                        li.style.color = '#ffb703'; 
+                        li.style.fontWeight = 'bold';
+                    }
+                    
+                    rankingList.appendChild(li);
+                    rank++;
+                });
+            } catch (error) {
+                console.error("Failed to load ranking:", error);
+            }
+        }
+
+        /************************************
+         *       배팅 옵션 버튼 이벤트
+         ************************************/
+        // 1등+2등 맞추기 => 배당률 10배
+        betOnTop2Button.addEventListener('click', () => handleBettingOption(12, 2));
+
+        // 1등만 맞추기 => 배당률 2배
+        betOnTop1Button.addEventListener('click', () => handleBettingOption(4, 1));
+
+        function handleBettingOption(multiplier, topN) {
+            payoutMultiplier = multiplier;
+            topNFinish = topN;
+
+            // 배팅 옵션 화면 전환
+            bettingContainer.style.display = 'none';
+            bettingDetails.style.display   = 'block';
+
+            // 선택 배열 초기화
+            selectedCars = [];
+            rankedCars = []; // 기존 선택 초기화
+            maxSelections = topN; // 최대 선택 가능한 차량 수를 topN으로 설정
+            cars.forEach(car => car.classList.remove('selected'));
+
+            bananaBetInput.value = '';
+        }
+
+        let rankedCars = [];
+        let maxSelections = 2; // 초기 값은 2로 설정
+
+        cars.forEach(car => {
+            car.addEventListener('click', () => {
+                const rankIndicator = car.nextElementSibling;
+
+                if (car.classList.contains('selected')) {
+                    car.classList.remove('selected');
+                    rankIndicator.style.display = 'none';
+                    rankedCars = rankedCars.filter(selected => selected !== car);
+                } else if (rankedCars.length < maxSelections) {
+                    car.classList.add('selected');
+                    rankIndicator.style.display = 'flex';
+                    rankedCars.push(car);
+                }
+
+                rankedCars.forEach((selected, index) => {
+                    const indicator = selected.nextElementSibling;
+                    indicator.textContent = index + 1;
+                });
+            });
+        });
+
+        /************************************
+         *   자동차 선택 로직 초기화
+         ************************************/
+        function initializeCarSelection() {
+            cars.forEach(car => {
+                car.addEventListener('click', () => {
+                    if (selectedCars.includes(car.alt)) {
+                        car.classList.remove('selected');
+                        selectedCars = selectedCars.filter(c => c !== car.alt);
+                    } else {
+                        if (selectedCars.length < topNFinish) {
+                            car.classList.add('selected');
+                            selectedCars.push(car.alt);
+                        } else {
+                            alert(`You can only select up to ${topNFinish} car(s).`);
+                        }
+                    }
+                });
+            });
+        }
+
+        initializeCarSelection();
+
+        /************************************
+         *        Confirm Bet 로직
+         ************************************/
+        confirmBetButton.addEventListener('click', async () => {
+            const betAmount = parseInt(bananaBetInput.value, 10);
+
+            if (!userId) {
+                alert("먼저 구글 로그인을 해주세요!");
+                return;
+            }
+            if (isNaN(betAmount) || betAmount <= 0) {
+                alert("올바른 배팅 금액을 입력하세요!");
+                return;
+            }
+            if (betAmount > bananaCount) {
+                alert("바나나가 부족합니다!");
+                return;
+            }
+            if (selectedCars.length === 0) {
+                alert("자동차를 선택해주세요!");
+                return;
+            }
+
+            await setBananaCount(bananaCount - betAmount);
+            alert(`Bet placed! You selected: ${selectedCars.join(', ')} with a bet of ${betAmount} bananas.`);
+
+            startRace(betAmount);
+        });
+
+        /************************************
+         *        레이스 시작
+         ************************************/
+        function startRace(betAmount) {
+            raceTrack.innerHTML = '';
+            resultMessage.textContent = '';
+            raceOver = false;
+
+            const centerX = 250;
+            const centerY = 150;
+            const radiusXOffsets = [220, 200, 180, 160];
+            const radiusYOffsets = [120, 110, 100, 90];
+            const startAngle = 90;
+
+            /*  
+               slowStart/gradualIncrease에서
+               2.3초(2300ms), 4초(4000ms), 3초(3000ms)를
+               차량마다 다르게 지정할 수 있게 수정
+            */
+
+            const speedPool = [
+                // slowStart - 서로 다른 시작시간1/2 (조금 더 앞당김)
+                // time1=1600, time2=3000
+                { slowStart: true, startTime1: 1600, startTime2: 3000, speed: 1.3, resetSpeed: 0.9 },
+
+                // 또 다른 slowStart
+                // time1=2000, time2=3200
+                { slowStart: true, startTime1: 2000, startTime2: 3200, speed: 1.4, resetSpeed: 1.0 },
+
+                // gradualIncrease - duration=2000
+                // startSpeed=0.4 → endSpeed=1.0
+                { gradualIncrease: true, duration: 2000, startSpeed: 0.4, endSpeed: 1.0 },
+
+                // gradualIncrease - duration=2800
+                // startSpeed=1.0 → endSpeed=1.6
+                { gradualIncrease: true, duration: 2800, startSpeed: 0.7, endSpeed: 1.3 },
+
+                // 고정 속도 더 낮춤
+                { constant: true, speed: 0.8 },
+                { constant: true, speed: 0.9 },
+
+                // slowStart - time1=1800, time2=3000
+                { slowStart: true, startTime1: 1800, startTime2: 3000, speed: 1.25, resetSpeed: 0.9 },
+
+                // gradualIncrease - duration=2500
+                // startSpeed=1.4 → endSpeed=0.6 (감속)
+                { gradualIncrease: true, duration: 2500, startSpeed: 1.4, endSpeed: 0.6 },
+
+                // 새로 추가
+                { slowStart: true, startTime1: 1000, startTime2: 2000, speed: 1.4, resetSpeed: 0.6},
+                { slowStart: true, startTime1: 4100, speed: 2.3}
+            ];
+
+
+            const assignedSpeeds = speedPool.sort(() => Math.random() - 0.5).slice(0, 4);
+
+            const carsInRace = ['Green', 'Red', 'Yellow', 'Blue'].map((name, index) => {
+                const car = document.createElement('img');
+                car.src = `${name.toLowerCase()}car.png`;
+                car.alt = name;
+                car.className = 'car';
+
+                const x = centerX + radiusXOffsets[index] * Math.cos((startAngle * Math.PI) / 180) - 15;
+                const y = centerY + radiusYOffsets[index] * Math.sin((startAngle * Math.PI) / 180) - 30;
+                car.style.left = `${x}px`;
+                car.style.top  = `${y}px`;
+
+                raceTrack.appendChild(car);
+
+                return {
+                    element: car,
+                    name,
+                    angle: startAngle,
+                    radiusX: radiusXOffsets[index],
+                    radiusY: radiusYOffsets[index],
+                    completedLaps: 0,
+                    speed: assignedSpeeds[index],
+                    elapsedTime: 0
+                };
+            });
+
+            let finishOrder = [];
+            const lapsToComplete = 1; 
+
+            const interval = setInterval(() => {
+                carsInRace.forEach(car => {
+                    if (raceOver) return;
+
+                    let currentSpeed;
+                    car.elapsedTime += 16; // 60FPS
+
+                    // (1) gradualIncrease 개선: duration 필드 사용(없으면 3000)
+                    if (car.speed.gradualIncrease) {
+                        const dur = car.speed.duration || 3000;
+                        const progress = Math.min(car.elapsedTime / dur, 1);
+                        currentSpeed = car.speed.startSpeed +
+                            progress * (car.speed.endSpeed - car.speed.startSpeed);
+
+                    // (2) slowStart 개선: startTime1, startTime2 필드(없으면 기존 2300/4000)
+                    } else if (car.speed.slowStart) {
+                        const t1 = (car.speed.startTime1 !== undefined) ? car.speed.startTime1 : 2300;
+                        const t2 = (car.speed.startTime2 !== undefined) ? car.speed.startTime2 : 4000;
+
+                        if (car.elapsedTime >= t1) {
+                            currentSpeed = car.speed.speed;
+                            if (car.elapsedTime >= t2 && car.speed.resetSpeed) {
+                                currentSpeed = car.speed.resetSpeed;
+                            }
+                        } else {
+                            currentSpeed = 1;
+                        }
+
+                    // (3) 고정 속도
+                    } else if (car.speed.constant) {
+                        currentSpeed = car.speed.speed;
+
+                    } else {
+                        currentSpeed = 1.5;
+                    }
+
+                    car.angle -= currentSpeed;
+
+                    if (car.angle <= -270) {
+                        car.angle += 360;
+                        car.completedLaps++;
+                        if (!finishOrder.includes(car.name) && car.completedLaps === lapsToComplete) {
+                            finishOrder.push(car.name);
+                            if (finishOrder.length === topNFinish) {
+                                clearInterval(interval);
+                                raceOver = true;
+                                determineResults(finishOrder, selectedCars, betAmount);
+                            }
+                        }
+                    }
+
+                    const radians = (car.angle * Math.PI) / 180;
+                    const x = centerX + car.radiusX * Math.cos(radians) - 15;
+                    const y = centerY + car.radiusY * Math.sin(radians) - 30;
+                    car.element.style.left = `${x}px`;
+                    car.element.style.top  = `${y}px`;
+                    car.element.style.transform = `rotate(${car.angle}deg)`;
+                });
+            }, 16);
+        }
+
+        /************************************
+         *        결과 판정 로직
+         ************************************/
+        function determineResults(finishOrder, selectedCars, betAmount) {
+            if (topNFinish === 1) {
+                if (finishOrder[0] === selectedCars[0]) {
+                    const winnings = betAmount * payoutMultiplier; 
+                    setBananaCount(bananaCount + winnings);
+                    resultMessage.textContent =
+                        `축하합니다! 1등: ${finishOrder[0]} 예측 성공! 
+                         ${winnings} 바나나를 획득했습니다!`;
+                } else {
+                    resultMessage.textContent = `아쉽습니다! 1등: ${finishOrder[0]}`;
+                }
+            } else if (topNFinish === 2) {
+                const [predictedFirst, predictedSecond] = selectedCars;
+                const firstPlaceCorrect = finishOrder[0] === predictedFirst;
+                const secondPlaceCorrect = finishOrder[1] === predictedSecond;
+
+                if (firstPlaceCorrect && secondPlaceCorrect) {
+                    const winnings = betAmount * payoutMultiplier;
+                    setBananaCount(bananaCount + winnings);
+                    resultMessage.textContent = 
+                        `축하합니다! 1등: ${finishOrder[0]}, 2등: ${finishOrder[1]} 예측 성공!
+                         ${winnings} 바나나를 획득했습니다!`;
+                } else {
+                    resultMessage.textContent = 
+                        `아쉽습니다! 1등: ${finishOrder[0]}, 2등: ${finishOrder[1]}`;
+                }
+            }
+
+            loadRanking();
+
+            bettingDetails.style.display   = 'none';
+            bettingContainer.style.display = 'block';
+        }
+
+        // 초기 UI 갱신
+        updateBananaStatus();
+    </script>
+</body>
+</html>
